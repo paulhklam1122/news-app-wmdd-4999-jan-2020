@@ -29,13 +29,13 @@ const TabContent = (props) => {
     />
   )
 
-  const renderContent = () => {
+  const renderContent = () => (
     isLoading ? (
       renderLoadingState()
     ) : (
       renderArticles()
     )
-  }
+  )
 
   return (
     <Container>
