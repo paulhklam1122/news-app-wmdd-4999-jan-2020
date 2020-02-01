@@ -39,9 +39,7 @@ const TabContent = (props) => {
 
   return (
     <Container>
-      <Content>
-        {renderContent()}
-      </Content>
+      {renderContent()}
     </Container>
   )
 }
