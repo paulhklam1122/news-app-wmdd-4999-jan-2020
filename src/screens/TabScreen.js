@@ -30,7 +30,7 @@ const TabScreen = () => (
         textStyle={styles.tabText}
         activeTextStyle={styles.tabText}
       >
-        <TabContentContainer source='reddit' />
+        <TabContentContainer source='reddit-r-all' />
       </Tab>
       <Tab
         heading='TechCrunch'

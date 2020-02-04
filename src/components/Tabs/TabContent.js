@@ -1,12 +1,13 @@
 import React from 'react'
-import { Container, Content, List, Text } from 'native-base'
+import { Container, List, Text } from 'native-base'
 import { StyleSheet } from 'react-native'
+
 import Article from '../Article'
 import Loading from '../Loading'
+import ArticleModal from '../modals/ArticleModal'
 
 const TabContent = (props) => {
-  const { articles, isLoading } = props
-  console.log('content articles', articles)
+  const { articleData, articles, isLoading, modalVisible, onArticleModalClose, onArticlePress, onArticleShare } = props
 
   const renderLoadingState = () => (
     <Loading
@@ -22,6 +23,7 @@ const TabContent = (props) => {
         return (
           <Article
             article={article}
+            onPress={onArticlePress}
           />
         )
       }}
@@ -40,6 +42,12 @@ const TabContent = (props) => {
   return (
     <Container>
       {renderContent()}
+      <ArticleModal
+        articleData={articleData}
+        modalVisible={modalVisible}
+        onArticleShare={onArticleShare}
+        onClose={onArticleModalClose}
+      />
     </Container>
   )
 }

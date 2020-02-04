@@ -6,8 +6,10 @@ import getArticles from '../../service/api'
 
 class TabContentContainer extends Component {
   state = {
+    articleData: {},
     articles: [],
     isLoading: true,
+    modalVisible: false,
     source: this.props.source || 'bbc-news'
   }
 
@@ -31,12 +33,46 @@ class TabContentContainer extends Component {
     })
   }
 
+  // handler functions
+  handleArticlePress = ({ title, url }) => {
+    this.setState({
+      articleData: { title, url },
+      modalVisible: true
+    })
+  }
+
+  handleArticleModalClose = () => {
+    this.setState({
+      articleData: {},
+      modalVisible: false
+    })
+  }
+
+  handleArticleShare = (title, url) => {
+    const message = `${title}\n\Read More @${url}\n\nShared via RN News App`
+    return Share.share(
+      {
+        title,
+        message,
+        uri: url
+      },
+      {
+        dialogTitle: `Share ${title}`
+      }
+    )
+  }
+
   render() {
-    const { articles, isLoading } = this.state
+    const { articleData, articles, isLoading, modalVisible } = this.state
     return (
       <TabContent
+        articleData={articleData}
         articles={articles}
         isLoading={isLoading}
+        onArticlePress={this.handleArticlePress}
+        onArticleModalClose={this.handleArticleModalClose}
+        onArticleShare={this.handleArticleShare}
+        modalVisible={modalVisible}
       />
     )
   }
